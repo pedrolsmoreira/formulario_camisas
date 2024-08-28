@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Camisas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            color: #666;
+        }
+
+        .shirt-options, .color-options {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .shirt-options div, .color-options div {
+            text-align: center;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .shirt-options img, .color-options img {
+            width: 100px;
+            height: 100px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+        }
+
+        .shirt-options div.selected img, .color-options div.selected img {
+            border-color: #ff5722;
+        }
+
+        label {
+            text-align: left;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        input[type="submit"] {
+            background-color: #ff5722;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1em;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #d9f2fa;
+        }
+
+        .measurements {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .measurements img {
+            width: 100%;
+            max-width: 313px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .reset-form {
+            margin-top: 20px;
+            background-color: #ff5722;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1em;
+        }
+
+        .reset-form:hover {
+            background-color: #d9f2fa;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .shirt-options, .color-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .shirt-options img, .color-options img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .measurements img {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            input[type="submit"], .reset-form {
+                font-size: 0.9em;
+                padding: 8px;
+            }
+
+            .shirt-options img, .color-options img {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pedido de Camisas</h1>
+        <h4>Os pedidos devem ser feitos de forma individual, ou seja, caso você queira mais de um modelo ou cor de camisa, deverá realizar um pedido para cada.</h4>
+
+        <form id="orderForm">
+            <input type="hidden" id="shirtType" name="shirtType" required>
+            <input type="hidden" id="shirtColor" name="shirtColor" required>
+
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Telefone</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <div>
+                <h3>Selecione o modelo da camisa</h3>
+            </div>
+            <div class="shirt-options">
+                <div id="normal">
+                    <img src="assets/icon_camisa_normal.png" alt="Camisa Normal">
+                    <p><strong>Camisa Normal</strong></p>
+                </div>
+                <div id="oversized">
+                    <img src="assets/icon_camisa_oversized.png" alt="Camisa Oversized">
+                    <p><strong>Camisa Oversized</strong></p>
+                </div>
+                <div id="infantil">
+                    <img src="assets/icon_camisa_infantil.png" alt="Camisa Infantil">
+                    <p><strong>Camisa Infantil</strong></p>
+                </div>
+            </div>
+
+            <div>
+                <h3>Selecione a cor da camisa</h3>
+            </div>
+            <div class="color-options">
+                <div id="preta">
+                    <img src="assets/camisa_preta.jpg" alt="Camisa Preta">
+                    <p><strong>Preta</strong></p>
+                </div>
+                <div id="branca">
+                    <img src="assets/camisa_branca.jpg" alt="Camisa Branca">
+                    <p><strong>Branca</strong></p>
+                </div>
+            </div>
+
+            <label for="shirtSize">Tamanho</label>
+            <select id="shirtSize" name="shirtSize" required>
+                <option value="" disabled selected>Escolha um modelo de camisa primeiro</option>
+            </select>
+
+            <label for="quantity">Quantidade</label>
+            <select id="quantity" name="quantity" required>
+                <option value="" disabled selected>Escolha a quantidade</option>
+            </select>
+
+            <div class="measurements" id="measurements">
+                <img id="measureImage" src="" alt="Medidas da Camisa">
+            </div>
+
+            <input type="submit" value="Enviar">
+        </form>
+
+        <button class="reset-form" onclick="resetForm()">Preencher Formulário Novamente</button>
+    </div>
+
+    <script>
+        const shirtOptions = document.querySelectorAll('.shirt-options div');
+        const colorOptions = document.querySelectorAll('.color-options div');
+        const shirtTypeInput = document.getElementById('shirtType');
+        const shirtColorInput = document.getElementById('shirtColor');
+        const shirtSizeSelect = document.getElementById('shirtSize');
+        const measurementsDiv = document.getElementById('measurements');
+        const measureImage = document.getElementById('measureImage');
+        const quantitySelect = document.getElementById('quantity');
+
+        const sizes = {
+            normal: ["P", "M", "G", "GG"],
+            oversized: ["14", "P", "M", "G", "GG", "EXG"],
+            infantil: ["P", "M", "G", "GG"]
+        };
+
+        const measurementImages = {
+            normal: "assets/med_normal.png",
+            oversized: "assets/med_over.png",
+            infantil: "assets/med_infantil.png"
+        };
+
+        // Preencher opções de quantidade
+        quantitySelect.innerHTML = '<option value="" disabled selected>Escolha a quantidade</option>';
+        for (let i = 1; i <= 10; i++) {
+            quantitySelect.innerHTML += `<option value="${i}">${i}</option>`;
+        }
+
+        shirtOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                shirtOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                shirtTypeInput.value = option.id;
+
+                // Atualizar os tamanhos disponíveis conforme o tipo de camisa
+                shirtSizeSelect.innerHTML = '<option value="" disabled selected>Escolha o tamanho</option>';
+                sizes[option.id].forEach(size => {
+                    shirtSizeSelect.innerHTML += `<option value="${size}">${size}</option>`;
+                });
+
+                // Atualizar a imagem de medidas
+                measureImage.src = measurementImages[option.id];
+                measurementsDiv.style.display = 'block';
+            });
+        });
+
+        colorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                colorOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                shirtColorInput.value = option.id;
+            });
+        });
+
+        const orderForm = document.getElementById('orderForm');
+
+        orderForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const data = new FormData(orderForm);
+
+            const formData = {
+                name: data.get('name'),
+                email: data.get('email'),
+                phone: data.get('phone'),
+                shirtType: data.get('shirtType'),
+                shirtColor: data.get('shirtColor'),
+                shirtSize: data.get('shirtSize'),
+                quantity: data.get('quantity')
+            };
+
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbyywQQNIMz8KYtdqHJkEioj37YNBJeTM7aOX5_O0R9VCNX0DSmVCM1H4B0PSosATYk/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('Pedido enviado com sucesso!');
+                    orderForm.reset();
+                    shirtOptions.forEach(o => o.classList.remove('selected'));
+                    colorOptions.forEach(o => o.classList.remove('selected'));
+                    measurementsDiv.style.display = 'none';
+                } else {
+                    alert('Ocorreu um erro ao enviar o pedido. Por favor, tente novamente.');
+                }
+            } catch (error) {
+                alert('Erro ao conectar com o servidor. Por favor, tente novamente mais tarde.');
+            }
+        });
+
+        function resetForm() {
+            orderForm.reset();
+            shirtOptions.forEach(o => o.classList.remove('selected'));
+            colorOptions.forEach(o => o.classList.remove('selected'));
+            measurementsDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
