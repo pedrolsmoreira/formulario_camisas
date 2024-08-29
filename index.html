@@ -10,11 +10,19 @@
             background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             color: #333;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 1000;
         }
 
         .container {
@@ -24,11 +32,11 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 600px;
             width: 100%;
+            margin: 100px auto 30px; /* Ajustar margem superior para cabeçalho fixo */
             text-align: center;
         }
 
         h1 {
-            text-align: center;
             color: #000000;
             margin-bottom: 20px;
         }
@@ -156,11 +164,18 @@
                 height: 70px;
             }
         }
+
+        /* Adicionar margem inferior para o conteúdo não ficar escondido */
+        .container {
+            margin-bottom: 70px; /* Ajuste conforme necessário */
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="header">
         <h1>Pedido de Camisas</h1>
+    </div>
+    <div class="container">
         <h4>Os pedidos devem ser feitos de forma individual, ou seja, caso você queira mais de um modelo ou cor de camisa, deverá realizar um pedido para cada.</h4>
 
         <form id="orderForm">
@@ -310,11 +325,11 @@
                 body: JSON.stringify(data)
             })
             .then(response => {
-                alert('Pedido enviado com sucesso!');
+                alert('Seu reserva foi registrada com sucesso!');
                 resetForm();
             })
             .catch(error => {
-                console.error('Erro ao enviar pedido:', error);
+                console.error('Erro ao enviar reserva:', error);
             });
         });
     </script>
