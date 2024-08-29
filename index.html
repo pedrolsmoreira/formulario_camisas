@@ -132,6 +132,42 @@
             background-color: #d9f2fa;
         }
 
+        /* Adicionar estilos para o pop-up */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .popup-content img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .popup-content a {
+            color: #ff5722;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .popup-content a:hover {
+            text-decoration: underline;
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
             .shirt-options, .color-options {
@@ -243,6 +279,16 @@
         <button class="reset-form" onclick="resetForm()">Preencher Formulário Novamente</button>
     </div>
 
+    <!-- Pop-up -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <img src="assets/qrcode_whatsapp.png" alt="QR Code">
+            <p>Clique aqui para realizar o pagamento da(s) sua(s) camisa(s) ou escaneie o qr-code acima.</p>
+            <a href="https://w.app/reservacamisa" target="_blank">Clique aqui para pagar</a>
+            <p><button onclick="closePopup()">Fechar</button></p>
+        </div>
+    </div>
+
     <script>
         const shirtOptions = document.querySelectorAll('.shirt-options div');
         const colorOptions = document.querySelectorAll('.color-options div');
@@ -252,6 +298,7 @@
         const measurementsDiv = document.getElementById('measurements');
         const measureImage = document.getElementById('measureImage');
         const quantitySelect = document.getElementById('quantity');
+        const popup = document.getElementById('popup');
 
         const sizes = {
             normal: ["P", "M", "G", "GG"],
@@ -305,6 +352,14 @@
             measurementsDiv.style.display = 'none';
         }
 
+        function showPopup() {
+            popup.style.display = 'flex';
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
         const form = document.getElementById('orderForm');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -325,7 +380,7 @@
                 body: JSON.stringify(data)
             })
             .then(response => {
-                alert('Seu reserva foi registrada com sucesso!');
+                showPopup();
                 resetForm();
             })
             .catch(error => {
