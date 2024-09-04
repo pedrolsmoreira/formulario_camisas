@@ -6,204 +6,133 @@
     <title>Pedido de Camisas</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
+            background-color: #f4f4f4;
         }
-
         .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: #fff;
-            padding: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem;
             text-align: center;
-            z-index: 1000;
         }
-
         .container {
-            background: #fff;
-            padding: 30px;
+            width: 80%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-            margin: 100px auto 30px; /* Ajustar margem superior para cabeçalho fixo */
-            text-align: center;
         }
-
-        h1 {
-            color: #000000;
-            margin-bottom: 20px;
+        h1, h3, h4 {
+            color: #333;
         }
-
-        h4 {
-            color: #666;
-        }
-
         .shirt-options, .color-options {
             display: flex;
             justify-content: space-around;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
         }
-
         .shirt-options div, .color-options div {
-            text-align: center;
-            margin: 10px;
             cursor: pointer;
+            text-align: center;
         }
-
         .shirt-options img, .color-options img {
             width: 100px;
-            height: 100px;
+            height: auto;
             border: 2px solid transparent;
-            border-radius: 8px;
         }
-
         .shirt-options div.selected img, .color-options div.selected img {
-            border-color: #ff5722;
+            border: 2px solid #007bff;
         }
-
-        label {
-            text-align: left;
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 1em;
-        }
-
-        input[type="submit"] {
-            background-color: #ff5722;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1em;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #d9f2fa;
-        }
-
-        .measurements {
-            margin-top: 20px;
-            display: none;
-        }
-
         .measurements img {
             width: 100%;
-            max-width: 313px;
             height: auto;
-            border-radius: 8px;
+            display: block;
+            margin: 1rem 0;
         }
-
+        form label {
+            display: block;
+            margin: 0.5rem 0 0.2rem;
+        }
+        form input, form select, form button {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
         .reset-form {
-            margin-top: 20px;
-            background-color: #ff5722;
-            color: white;
-            padding: 10px;
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #dc3545;
+            color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            width: 100%;
-            font-size: 1em;
         }
-
         .reset-form:hover {
-            background-color: #d9f2fa;
+            background-color: #c82333;
         }
-
-        /* Adicionar estilos para o pop-up */
+        #cart {
+            margin-top: 2rem;
+        }
+        #cart ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #cart ul li {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+        }
         .popup {
             display: none;
             position: fixed;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
-            z-index: 1001;
         }
-
         .popup-content {
-            background: #fff;
-            padding: 20px;
+            background-color: #fff;
+            padding: 2rem;
             border-radius: 8px;
             text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
         }
-
         .popup-content img {
             width: 200px;
-            height: 200px;
+            height: auto;
         }
-
-        .popup-content a {
-            color: #ff5722;
-            text-decoration: none;
-            font-weight: bold;
+        .popup-content button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
-
-        .popup-content a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .shirt-options, .color-options {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .shirt-options img, .color-options img {
-                width: 80px;
-                height: 80px;
-            }
-
-            .measurements img {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-            }
-
-            input[type="submit"], .reset-form {
-                font-size: 0.9em;
-                padding: 8px;
-            }
-
-            .shirt-options img, .color-options img {
-                width: 70px;
-                height: 70px;
-            }
-        }
-
-        /* Adicionar margem inferior para o conteúdo não ficar escondido */
-        .container {
-            margin-bottom: 70px; /* Ajuste conforme necessário */
+        .popup-content button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -212,7 +141,7 @@
         <h1>Pedido de Camisas</h1>
     </div>
     <div class="container">
-        <h4>Os pedidos devem ser feitos de forma individual, ou seja, caso você queira mais de um modelo ou cor de camisa, deverá realizar um pedido para cada.</h4>
+        <h4>Adicione os itens ao carrinho antes de finalizar o pedido.</h4>
 
         <form id="orderForm">
             <input type="hidden" id="shirtType" name="shirtType" required>
@@ -264,19 +193,24 @@
             </div>
 
             <label for="shirtSize">Tamanho</label>
-            <select id="shirtSize" name="shirtSize" required>
+            <select id="shirtSize" name="shirtSize" required disabled>
                 <option value="" disabled selected>Escolha um modelo de camisa primeiro</option>
             </select>
 
-         
-
             <label for="quantity">Quantidade</label>
             <select id="quantity" name="quantity" required>
-                <option value="" disabled selected>Escolha a quantidade</option>
+                <!-- As opções de quantidade serão preenchidas dinamicamente -->
             </select>
 
-            <input type="submit" value="Enviar">
+            <button type="button" onclick="addToCart()">Adicionar ao Carrinho</button>
+            <button type="button" id="finalizeButton" onclick="finalizeOrder()">Finalizar Pedido</button>
         </form>
+
+        <div id="cart">
+            <h3>Carrinho</h3>
+            <ul id="cartItems"></ul>
+            <button type="button" onclick="resetCart()">Esvaziar Carrinho</button>
+        </div>
 
         <button class="reset-form" onclick="resetForm()">Preencher Formulário Novamente</button>
     </div>
@@ -292,103 +226,171 @@
     </div>
 
     <script>
-        const shirtOptions = document.querySelectorAll('.shirt-options div');
-        const colorOptions = document.querySelectorAll('.color-options div');
         const shirtTypeInput = document.getElementById('shirtType');
         const shirtColorInput = document.getElementById('shirtColor');
         const shirtSizeSelect = document.getElementById('shirtSize');
-        const measurementsDiv = document.getElementById('measurements');
-        const measureImage = document.getElementById('measureImage');
         const quantitySelect = document.getElementById('quantity');
-        const popup = document.getElementById('popup');
+        const cartItemsList = document.getElementById('cartItems');
+        const cartItems = [];
+        const measurementsImage = document.getElementById('measureImage');
 
-        const sizes = {
-            normal: ["P", "M", "G", "GG","XG","EXG"],
-            oversized: ["14", "P", "M", "G", "GG"],
-            infantil: ["2 ANOS", "4 ANOS", "6 ANOS", "8 ANOS", "10 ANOS", "12 ANOS",, "14 ANOS"]
-        };
+        document.querySelectorAll('.shirt-options div').forEach(div => {
+            div.addEventListener('click', function() {
+                updateSelection(this, shirtTypeInput);
+                updateSizeOptions();
+                updateMeasurementsImage();
+            });
+        });
 
-        const measurementImages = {
-            normal: "assets/med_normal.png",
-            oversized: "assets/med_over.png",
-            infantil: "assets/med_infantil.png"
-        };
+        document.querySelectorAll('.color-options div').forEach(div => {
+            div.addEventListener('click', function() {
+                updateSelection(this, shirtColorInput);
+            });
+        });
 
-        // Preencher opções de quantidade
-        quantitySelect.innerHTML = '<option value="" disabled selected>Escolha a quantidade</option>';
-        for (let i = 1; i <= 10; i++) {
-            quantitySelect.innerHTML += `<option value="${i}">${i}</option>`;
+        function updateSelection(selectedDiv, input) {
+            const allDivs = selectedDiv.parentElement.querySelectorAll('div');
+            allDivs.forEach(div => {
+                div.classList.remove('selected');
+            });
+
+            selectedDiv.classList.add('selected');
+            input.value = selectedDiv.id;
+            if (input === shirtTypeInput) {
+                updateQuantityOptions();
+            }
         }
 
-        shirtOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                shirtOptions.forEach(o => o.classList.remove('selected'));
-                option.classList.add('selected');
-                shirtTypeInput.value = option.id;
-
-                // Atualizar os tamanhos disponíveis conforme o tipo de camisa
-                shirtSizeSelect.innerHTML = '<option value="" disabled selected>Escolha o tamanho</option>';
-                sizes[option.id].forEach(size => {
-                    shirtSizeSelect.innerHTML += `<option value="${size}">${size}</option>`;
+        function updateSizeOptions() {
+            const shirtType = shirtTypeInput.value;
+            if (shirtType) {
+                shirtSizeSelect.innerHTML = '';
+                const sizes = {
+                    normal: ['P', 'M', 'G', 'GG', 'XG', 'EXG'],
+                    oversized: ['14', 'P', 'M', 'G', 'GG'],
+                    infantil: ['2 ANOS', '4 ANOS', '6 ANOS', '8 ANOS', '10 ANOS', '12 ANOS', '14 ANOS']
+                };
+                const availableSizes = sizes[shirtType] || [];
+                availableSizes.forEach(size => {
+                    const option = document.createElement('option');
+                    option.value = size;
+                    option.textContent = size;
+                    shirtSizeSelect.appendChild(option);
                 });
+                shirtSizeSelect.disabled = availableSizes.length === 0;
+            } else {
+                shirtSizeSelect.innerHTML = '<option value="" disabled selected>Escolha um modelo de camisa primeiro</option>';
+                shirtSizeSelect.disabled = true;
+            }
+        }
 
-                // Atualizar a imagem de medidas
-                measureImage.src = measurementImages[option.id];
-                measurementsDiv.style.display = 'block';
-            });
-        });
+        function updateMeasurementsImage() {
+            const shirtType = shirtTypeInput.value;
+            const imageSrc = {
+                normal: 'assets/medidas_normal.png',
+                oversized: 'assets/medidas_oversized.png',
+                infantil: 'assets/medidas_infantil.png'
+            };
+            measurementsImage.src = imageSrc[shirtType] || '';
+        }
 
-        colorOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                colorOptions.forEach(o => o.classList.remove('selected'));
-                option.classList.add('selected');
-                shirtColorInput.value = option.id;
+        function updateQuantityOptions() {
+            quantitySelect.innerHTML = '';
+            for (let i = 1; i <= 10; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                quantitySelect.appendChild(option);
+            }
+            quantitySelect.disabled = false;
+        }
+
+        function addToCart() {
+            const shirtType = shirtTypeInput.value;
+            const shirtColor = shirtColorInput.value;
+            const shirtSize = shirtSizeSelect.value;
+            const quantity = quantitySelect.value;
+
+            if (!shirtType || !shirtColor || !shirtSize || !quantity) {
+                alert('Preencha todos os campos antes de adicionar ao carrinho.');
+                return;
+            }
+
+            const item = {
+                type: shirtType,
+                color: shirtColor,
+                size: shirtSize,
+                quantity: quantity
+            };
+
+            cartItems.push(item);
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            cartItemsList.innerHTML = '';
+            cartItems.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${item.quantity} x ${item.type} (${item.color}) - Tamanho: ${item.size}`;
+                cartItemsList.appendChild(li);
             });
-        });
+        }
+
+        function finalizeOrder() {
+    const orderData = cartItems.map(item => ({
+        "name": document.getElementById('name').value,
+        "email": document.getElementById('email').value,
+        "phone": document.getElementById('phone').value,
+        "shirtType": item.type,
+        "shirtColor": item.color,
+        "shirtSize": item.size,
+        "quantity": parseInt(item.quantity, 10)  // Converte para número
+    }));
+
+    fetch('https://api.airtable.com/v0/appwfhRy4DlYbmdbq/forms', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer patKsCKzTqt7we3nc.0431f15b83a1da68c248f180c44906db8d207723c82b1ab0b122c57590eece48',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "records": orderData.map(data => ({ "fields": data }))
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        document.getElementById('popup').style.display = 'flex';
+        cartItems.length = 0; // Clear cart
+        updateCartDisplay();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+
+        function resetCart() {
+            cartItems.length = 0;
+            updateCartDisplay();
+        }
 
         function resetForm() {
             document.getElementById('orderForm').reset();
-            shirtOptions.forEach(o => o.classList.remove('selected'));
-            colorOptions.forEach(o => o.classList.remove('selected'));
-            shirtSizeSelect.innerHTML = '<option value="" disabled selected>Escolha um modelo de camisa primeiro</option>';
-            measurementsDiv.style.display = 'none';
-        }
-
-        function showPopup() {
-            popup.style.display = 'flex';
+            document.querySelectorAll('.shirt-options div').forEach(div => {
+                div.classList.remove('selected');
+            });
+            document.querySelectorAll('.color-options div').forEach(div => {
+                div.classList.remove('selected');
+            });
+            cartItems.length = 0;
+            updateCartDisplay();
+            updateQuantityOptions(); // Ensure quantity options are visible
         }
 
         function closePopup() {
-            popup.style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
         }
-
-        const form = document.getElementById('orderForm');
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            fetch('https://script.google.com/macros/s/AKfycbyQZPNbXQobTBvD5QtVpvQhxQgNX_JH4t84_yHUGj_jvUSrljXIraG8xuPcHZEbRLyI/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                showPopup();
-                resetForm();
-            })
-            .catch(error => {
-                console.error('Erro ao enviar reserva:', error);
-            });
-        });
     </script>
 </body>
 </html>
